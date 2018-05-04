@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'git'
 require 'byebug'
 
@@ -15,7 +17,7 @@ end
 def reset_file
   target_path_matcher = Regexp.new ARGV[1]
   paths = g.status.map(&:path)
-  target_path = paths.detect { |path| path =~ target_path_matcher }
+  target_path = paths.detect { |path| status = 'M' && path =~ target_path_matcher }
   g.reset target_path
 end
 
