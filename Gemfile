@@ -1,3 +1,3 @@
-gem 'git', git: 'https://github.com/ruby-git/ruby-git'
+gem 'git', git: 'https://github.com/dcshiller/ruby-git'
 gem 'pry'
 gem 'byebug'

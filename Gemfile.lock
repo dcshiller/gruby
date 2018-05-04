@@ -1,6 +1,6 @@
 GIT
-  remote: https://github.com/ruby-git/ruby-git
-  revision: b48231ecd0f1a95e1f37a983a6ebadad7cc3162c
+  remote: https://github.com/dcshiller/ruby-git
+  revision: 5073b7ffe2a2fa7f3a9ce4e0de562b70f5374f70
   specs:
     git (1.3.0)
 
