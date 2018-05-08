@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
 require 'git'
-#require 'byebug'
+# require 'byebug'
 
 def g
-  @_g = Git.open('./')
+  @_g ||= Git.open('./')
 end
 
 def add_file
@@ -13,6 +13,22 @@ def add_file
   target_path = paths.detect { |path| path =~ target_path_matcher }
   return unless target_path
   g.add target_path
+end
+
+def add_matching
+  target_path_matcher = Regexp.new ARGV[1]
+  paths = g.status.map(&:path)
+  target_path = paths.each do |path|
+    g.add(target_path) if path =~ target_path_matcher
+  end
+end
+
+def add_except
+  target_path_matcher = Regexp.new ARGV[1]
+  paths = g.status.map(&:path)
+  target_path = paths.each do |path|
+    g.add(target_path) unless path =~ target_path_matcher
+  end
 end
 
 def reset_file
@@ -24,6 +40,22 @@ def reset_file
   end
   return unless target_path
   g.reset target_path
+end
+
+def reset_matching
+  target_path_matcher = Regexp.new ARGV[1]
+  paths = g.status.map(&:path)
+  target_path = paths.each do |path|
+    g.reset(target_path) if path =~ target_path_matcher
+  end
+end
+
+def reset_except
+  target_path_matcher = Regexp.new ARGV[1]
+  paths = g.status.map(&:path)
+  target_path = paths.each do |path|
+    g.reset(target_path) unless path =~ target_path_matcher
+  end
 end
 
 def rebase_to
